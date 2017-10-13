@@ -1,0 +1,6 @@
+# Spring_Experiments
+
+It's a project where are a lot of different stuff connected with Spring or not (preferably yes).
+
+It's very possible that most of this stuff doesn't work, because...
+Because...
