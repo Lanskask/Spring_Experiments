@@ -3,14 +3,12 @@
 
 @Controller
 class application {
+
     @RequestMapping("/greeting")
     public String greeting(
-        @RequestParam(value="name",  
-        required=false,
-        defaultValue="world") 
-            String name,
-            Model model) {
-                model.getAttribute("name", name);
-                return "greeting";
-        }
+        @RequestParam(value="name", required=false, defaultValue="world")
+        String name, Model model) {
+            model.getAttribute("name", name);
+            return "greeting";
+    }
 }
