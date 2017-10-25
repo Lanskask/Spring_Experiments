@@ -1,13 +1,47 @@
 package hello;
 
-import org.joda.time.LocalTime;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HelloWorld {
-  public static void main(String[] args) {
-    LocalTime currentTime = new LocalTime();
-    System.out.println("The current local time is: " + currentTime);
+  SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
-    Greeter greeter = new Greeter();
-    System.out.println(greeter.sayHello());
+  public static void main(String[] args) {
+    HelloWorld helloWorld = new HelloWorld();
+    helloWorld.run();
   }
+
+  void run() {
+//    this.dateGetTime();
+//    System.out.println("Parsed Err: " + this.parsedDate());
+    System.out.println("Change days: 1 " + this.plusDate(1));
+    System.out.println("Change days: -1 " + this.plusDate(-1));
+  }
+
+  Date dateGetTime() {
+    return new Date((new Date()).getTime());
+  }
+
+  Date parsedDate() {
+    Date parsedRes = new Date();
+    try {
+      parsedRes = formater.parse("2017-10-24");
+    } catch (ParseException pe) {
+      pe.printStackTrace();
+    }
+    return parsedRes;
+  }
+
+  Date plusDate(int numOfDays) {
+    Date date = new Date();
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(date);
+    calendar.add(Calendar.DATE, numOfDays);
+    date = calendar.getTime();
+
+    return date;
+  }
+
 }
