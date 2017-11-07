@@ -4,17 +4,15 @@ import org.junit.Before;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by smurtazin on 24.10.2017.
  */
-public class HelloWorldTest {
-    HelloWorld hello;
+public class PlusMinusDayTest {
+    PlusMinusDay hello;
 
     @Before
     public void init() {
-        this.hello = new HelloWorld();
+        this.hello = new PlusMinusDay();
     }
 
     @org.junit.Test

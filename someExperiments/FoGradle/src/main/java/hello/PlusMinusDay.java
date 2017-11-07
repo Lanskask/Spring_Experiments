@@ -5,12 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class HelloWorld {
+public class PlusMinusDay {
   SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
   public static void main(String[] args) {
-    HelloWorld helloWorld = new HelloWorld();
-    helloWorld.run();
+    PlusMinusDay plusMinusDay = new PlusMinusDay();
+    plusMinusDay.run();
   }
 
   void run() {
