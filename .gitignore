@@ -1,5 +1,12 @@
 .gradle/
+.mvn/
 .idea/
 build/
 out/
 GradleBasic/demo3/gradlew
+
+gradlew.bat
+gradlew
+
+hs_err_pid7768.log
+hs_err_pid11240.log

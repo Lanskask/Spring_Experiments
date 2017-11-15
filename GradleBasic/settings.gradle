@@ -1,4 +1,7 @@
 rootProject.name = 'GradleBasic'
-include 'RelationalDataJDBC'
+
+include 'demo3'
 include 'ValidatingForm'
 include 'ConsumRest'
+include 'gradle-multpr-exp1'
+

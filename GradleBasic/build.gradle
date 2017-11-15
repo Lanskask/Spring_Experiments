@@ -1,4 +1,4 @@
-group 'GradleExp'
+group 'springExperiments'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

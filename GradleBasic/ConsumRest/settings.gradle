@@ -1,2 +1,3 @@
-rootProject.name = 'ConsumRest'
+include '../gradle-multpr-exp1/app-controller'
+findProject(':../gradle-multpr-exp1/app-controller')?.name = 'app-controller'
 
