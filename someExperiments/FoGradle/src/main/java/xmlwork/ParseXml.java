@@ -145,9 +145,19 @@ public class ParseXml {
 //        this.loopXml(this.xmlStaff);
 //        this.loopXml(this.xmlText);
 
+//        this.testBuildingXmlViaStrFormat();
+    }
+
+    void testBuildingXmlViaStrFormat() {
         this.printArray(this.coords);
         Placemark placemark = new Placemark();
+        this.coords.add(new Coord(56.2, 35.6));
+        this.coords.add(new Coord(5.2, 20.1));
+        this.coords.add(new Coord(8.91, 6.1));
+
+        placemark.point = new Point(this.coords);
         placemark.point.coordinates = this.coords;
+
         System.out.println(this.buildNewXmlKml(placemark));
     }
 
@@ -205,9 +215,15 @@ public class ParseXml {
         String detailsUrl;
         String detailsUrlEn;
         String styleUrl;
+
         Point point;
-        class Point {
-            List<Coord> coordinates;
+    }
+
+    class Point {
+        List<Coord> coordinates;
+
+        Point(List<Coord> coordinates) {
+            this.coordinates = coordinates;
         }
     }
 
