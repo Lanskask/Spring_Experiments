@@ -1,6 +1,11 @@
 package xmlwork;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.w3c.dom.*;
+import xmlwork.pojos.Placemark;
+import xmlwork.pojos.Coord;
+import xmlwork.pojos.Point;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,17 +15,8 @@ import java.util.List;
 
 public class ParseXml {
 
-    class Coord {
-        Double lan;
-        Double lon;
-
-        public Coord(Double lan, Double lon) {
-            this.lan = lan;
-            this.lon = lon;
-        }
-    }
-
     List<Coord> coords = new ArrayList<>();
+    List<Placemark> placemarks = new ArrayList<>();
 
     // ----------
     private String xmlText2 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> " +
@@ -50,6 +46,7 @@ public class ParseXml {
             "        <Style id=\"sh_ttm_Style\">\n" +
             "        <IconStyle><Icon><href>info.png</href></Icon></IconStyle><LineStyle><color>66ffaa00</color><width>5</width></LineStyle>\n" +
             "        </Style>\n" +
+            "\n" +
             "        <Placemark>\n" +
             "            <name>НТР</name>\n" +
             "            <details_url>http://ntrlab.ru/</details_url>\n" +
@@ -67,7 +64,26 @@ public class ParseXml {
             "            <styleUrl>#ttm_Style</styleUrl>\n" +
             "            <Point>\n" +
             "                <coordinates>37.64684,55.82817,0</coordinates>\n" +
-            "                <coordinates>374.64684,554.82817,0</coordinates>\n" +
+            "            </Point>\n" +
+            "        </Placemark>\n" +
+            "\n" +
+            "        <Placemark>\n" +
+            "            <name>НТР</name>\n" +
+            "            <details_url>http://ntrlab.ru/</details_url>\n" +
+            "            <details_url_en>http://ntrlab.com/</details_url_en>\n" +
+            "            <parameters>\n" +
+            "                <parameter>\n" +
+            "                    <key>description</key>\n" +
+            "                    <value>Привет Мир!</value>\n" +
+            "                </parameter>\n" +
+            "                <parameter>\n" +
+            "                    <key>description_en</key>\n" +
+            "                    <value>Hello World</value>\n" +
+            "                </parameter>\n" +
+            "            </parameters>\n" +
+            "            <styleUrl>#ttm_Style</styleUrl>\n" +
+            "            <Point>\n" +
+            "                <coordinates>37.64684,55.82817,0</coordinates>\n" +
             "            </Point>\n" +
             "        </Placemark>\n" +
             "    </Document>\n" +
@@ -141,11 +157,13 @@ public class ParseXml {
 
     void run() {
         this.strToXml(this.xmlText);
+        this.strToXmlAllPlcMarks(this.xmlText);
 //        this.strToXml(this.xmlStaff);
 //        this.loopXml(this.xmlStaff);
 //        this.loopXml(this.xmlText);
 
 //        this.testBuildingXmlViaStrFormat();
+        this.printArray(this.coords);
     }
 
     void testBuildingXmlViaStrFormat() {
@@ -162,6 +180,7 @@ public class ParseXml {
     }
 
     void printArray(List<Coord> list) {
+        System.out.println("--- It's a List<Coord> list: ");
         for(Coord elem: list) System.out.println("lan: " + elem.lan + "; lon: " + elem.lon);
     }
 
@@ -210,22 +229,7 @@ public class ParseXml {
         return String.format(this.xmlTextTemplate,/* details_url,  details_url_en, *//*coordinates*/sb.toString());
     }
 
-    class Placemark {
-        String name;
-        String detailsUrl;
-        String detailsUrlEn;
-        String styleUrl;
 
-        Point point;
-    }
-
-    class Point {
-        List<Coord> coordinates;
-
-        Point(List<Coord> coordinates) {
-            this.coordinates = coordinates;
-        }
-    }
 
     public void strToXml(String xmlString) {
         try {
@@ -234,7 +238,6 @@ public class ParseXml {
             InputStream inputStream = new ByteArrayInputStream(xmlString.getBytes());
             Document document = dBuilder.parse(inputStream);
 
-            //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             document.getDocumentElement().normalize();
             NodeList nList = document.getElementsByTagName("coordinates");
 
@@ -247,6 +250,62 @@ public class ParseXml {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void strToXmlAllPlcMarks(String xmlString) {
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            InputStream inputStream = new ByteArrayInputStream(xmlString.getBytes());
+            Document document = dBuilder.parse(inputStream);
+
+            document.getDocumentElement().normalize();
+            Placemark placemark = new Placemark();
+            NodeList nListPlcmrks = document.getElementsByTagName("Placemark");
+
+            // --------------------
+            for (int temp = 0; temp < nListPlcmrks.getLength(); temp++) {
+                Element namesElement = (Element) nListPlcmrks.item(temp);
+//                NodeList nListNames = namesElement.getElementsByTagName("name");
+                NodeList nListDetailsRu = namesElement.getElementsByTagName("details_url");
+                NodeList nListDetailsEn = namesElement.getElementsByTagName("details_url_en");
+                NodeList nListCoords = namesElement.getElementsByTagName("coordinates");
+                NodeList nListDescrNames = namesElement.getElementsByTagName("value");
+
+                /*if(nListNames.getLength() > 0) {
+                    for (int i = 0; i < nListNames.getLength(); i++) {
+                        System.out.println(nListNames.item(i).getTextContent());
+                    }
+                }*/
+
+                /*placemark.setName(nListNames.item(0).getTextContent());
+                placemark.setDetailsUrl(nListDetailsRu.item(0).getTextContent());
+                placemark.setDetailsUrlEn(nListDetailsEn.item(0).getTextContent());*/
+
+                placemark.setRuName(nListDescrNames.item(0).getTextContent());
+                placemark.setEnName(nListDescrNames.item(1).getTextContent());
+                placemark.setRuUrl(nListDetailsRu.item(0).getTextContent());
+                placemark.setRuUrl(nListDetailsEn.item(0).getTextContent());
+
+                placemark.setLat(Double.parseDouble(
+                        this.splitCoordsStr(nListCoords.item(0).getTextContent())[0]
+                ));
+                placemark.setLon(Double.parseDouble(
+                        this.splitCoordsStr(nListCoords.item(0).getTextContent())[1]
+                ));
+                placemark.setAlt(Double.parseDouble(
+                        this.splitCoordsStr(nListCoords.item(0).getTextContent())[2]
+                ));
+            }
+            this.placemarks.add(placemark);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // --------------------
+    }
+
+    String[] splitCoordsStr(String coordStr) {
+        return coordStr.split(",");
     }
 
     Coord splitCoords(String coordStr) {
@@ -333,4 +392,5 @@ public class ParseXml {
             }
         }
     }
+
 }

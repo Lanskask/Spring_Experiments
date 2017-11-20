@@ -248,7 +248,7 @@ public class BuildXmlDoc {
             tfe.printStackTrace();}
     }
 
-/*    void buildXml() {
+    /*    void buildXml() {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 //        InputStream inputStream = new ByteArrayInputStream(xmlString.getBytes());
