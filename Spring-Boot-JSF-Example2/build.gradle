@@ -1,4 +1,9 @@
-//name 'Spring-Boot-JSF-Example'
+group 'Spring_Experiments'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
 
 buildscript {
     repositories {
@@ -11,33 +16,27 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'spring-boot'
+sourceCompatibility = 1.8
 
 repositories {
-    mavenLocal()
     mavenCentral()
+    mavenLocal()
     maven { url "http://repo.spring.io/libs-release" }
 }
 
 dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
     compile("org.springframework.boot:spring-boot-starter-web")
-    
+
     compile group: "org.primefaces", name: "primefaces", version: "5.0"
     compile group: "com.sun.faces", name: "jsf-api", version: "2.2.7"
     compile group: "com.sun.faces", name: "jsf-impl", version: "2.2.7"
     compile group: 'javax.el', name: 'el-api', version: '1.0'
     compile "org.glassfish.web:el-impl:2.2"
-    
+
     compile "org.apache.tomcat.embed:tomcat-embed-core:8.0.9"
     compile "org.apache.tomcat.embed:tomcat-embed-logging-juli:7.0.54"
     compile "org.apache.tomcat.embed:tomcat-embed-jasper:7.0.54"
-    
-    testCompile("junit:junit")
-}
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '1.11'
+    testCompile("junit:junit")
 }
