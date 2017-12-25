@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.smurtazin.springexperiments.basic.HelloWorldTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-10-13T15:16:34" hostname="LAPTOP-EUVFJAL7" time="0.013">
-  <properties/>
-  <testcase name="main" classname="ru.smurtazin.springexperiments.basic.HelloWorldTest" time="0.013"/>
-  <system-out><![CDATA[Hello, World! Args = a; b
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -1,2 +1,11 @@
 rootProject.name = 'springExperiments'
+include 'SubProj'
+include 'GradleBasic'
+include 'SpringTesting'
+include 'WebExpers'
+include 'WebExpers:JsfExpers'
+include 'SpringTesting:AngSprGroovyTest'
+findProject(':SpringTesting:AngSprGroovyTest')?.name = 'AngSprGroovyTest'
+include 'AngGroovyTest'
+include 'Spring-Boot-JSF-Example2'
 

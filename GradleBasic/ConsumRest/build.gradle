@@ -1,4 +1,5 @@
-group 'ru.smurtazin.springtest'
+//group 'ru.smurtazin.springtest'
+group 'GradleBasic'
 version '1.0-SNAPSHOT'
 
 buildscript {

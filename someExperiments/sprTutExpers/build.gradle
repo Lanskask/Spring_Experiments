@@ -1,6 +1,8 @@
+//name 'sprTutExpers'
+
 buildscript {
   repositories {
-  maven { url "http://repo.spring.io/libs-release"  }
+    maven { url "http://repo.spring.io/libs-release"  }
     mavenLocal()
     mavenCentral()
   }
@@ -14,6 +16,8 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
 
 jar {
   baseName = 'gs-batch-processing'

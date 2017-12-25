@@ -1,17 +1,22 @@
 apply plugin: 'java'
 
 repositories {
-  mavenLocal()
-  mavenCentral()
+    mavenLocal()
+    mavenCentral()
 }
 
 dependencies {
-  compile "joda-time:joda-time:2.2"
+    compile "joda-time:joda-time:2.2"
+    compile group: 'com.netflix.hystrix', name: 'hystrix-core', version: '1.0.2'
+    compile group: 'com.optimaize.languagedetector', name: 'language-detector', version: '0.5'
+    compileOnly "org.projectlombok:lombok:1.16.16"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.2.0'
 }
 
 jar {
-  baseName = 'gs-gradle'
-  version =  '0.1.0'
+    baseName = 'gs-gradle'
+    version = '0.1.0'
 }
 
 task wrapper(type: Wrapper) {

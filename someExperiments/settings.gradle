@@ -1,0 +1,5 @@
+rootProject.name = 'someExperiments'
+include 'GormGroovy'
+include 'FoGradle'
+include 'sprTutExpers'
+
