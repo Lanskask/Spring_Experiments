@@ -1,2 +1,28 @@
-.gradle/
+
+# ==== Files
+*.iml
+*.class
+*.txt
+*.war
+*.jar
+*.sublime-project
+*.sublime-workspace
+.classpath
+gradlew
+gradlew.bat
+mvnw
+mvnw.cmd
+.project
+
+# ==== Folders
 .idea/
+.gradle/
+.mvn/
+#.git/
+.settings/
+classes/
+out/
+target/
+build/
+gradle/
+
